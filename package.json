@@ -1,13 +1,39 @@
 {
-  "name": "@sanserna/modules",
+  "name": "sanserna-modules",
   "private": true,
+  "description": "A set of modules that can be used across different types of javascript projects",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sanserna/modules"
+  },
+  "scripts": {
+    "add:module": "plop module && yarn",
+    "build": "lerna run build --stream --scope",
+    "build:all": "npm run clean && lerna run build",
+    "lint": "lerna run lint --stream",
+    "changed": "lerna changed",
+    "clean": "lerna exec -- rimraf dist",
+    "list:components": "lerna list",
+    "test:unit": "jest --coverage",
+    "test:watch": "jest --watch",
+    "update:all": "yarn upgrade-interactive --latest"
+  },
   "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/runtime": "^7.11.2",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.20.0",
     "eslint-plugin-json": "^2.1.2",
     "lerna": "^3.20.2",
-    "plop": "^2.7.4"
+    "plop": "^2.7.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   }
 }

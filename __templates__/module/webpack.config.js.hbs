@@ -1,0 +1,40 @@
+const { resolve } = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+module.exports = {
+  context: resolve(__dirname, 'src'),
+  entry: {
+    app: './index.js',
+  },
+  plugins: [
+    new CleanWebpackPlugin({
+      cleanStaleWebpackAssets: false
+    }),
+  ],
+  output: {
+    filename: '[name].js',
+    libraryTarget: 'umd',
+    library: '{{camelCase name}}',
+    umdNamedDefine: true,
+    path: resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { modules: false }],
+            ],
+            plugins: [
+              '@babel/plugin-transform-runtime',
+            ],
+          },
+        },
+      },
+    ],
+  },
+};

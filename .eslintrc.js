@@ -10,6 +10,7 @@ module.exports = {
     'plugin:json/recommended',
     'plugin:jest/recommended',
   ],
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module',
