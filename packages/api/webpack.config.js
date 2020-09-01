@@ -14,7 +14,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: '{{camelCase name}}',
+    library: 'api',
     umdNamedDefine: true,
     path: resolve(__dirname, 'dist'),
   },
