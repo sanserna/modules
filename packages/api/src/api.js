@@ -10,7 +10,7 @@ export default class Api {
     timeout = 30000,
     adapter = cacheFactory(),
   }) {
-    const client = axios.create({
+    this.client = axios.create({
       baseURL,
       headers,
       timeout,
@@ -26,9 +26,7 @@ export default class Api {
 
       this[endpointName] = ({ urlParams, config = {}, data = {} } = {}) => {
         const composedUri = getURI(uri, urlParams);
-
-        let source = CancelToken.source();
-
+        const source = CancelToken.source();
         const requestConfig = {
           ...config,
           cancelToken: source.token,
@@ -37,18 +35,15 @@ export default class Api {
         let apiCall;
 
         if (['get', 'delete', 'head', 'options'].includes(method)) {
-          apiCall = client[method](composedUri, {
+          apiCall = this.client[method](composedUri, {
             ...requestConfig,
             cacheEnabled,
           });
         } else {
-          apiCall = client[method](composedUri, data, requestConfig);
+          apiCall = this.client[method](composedUri, data, requestConfig);
         }
 
-        apiCall.abort = () => {
-          source.cancel('cancel');
-          source = null;
-        };
+        apiCall.abort = () => source.cancel('cancel');
 
         return apiCall;
       };

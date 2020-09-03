@@ -10,7 +10,7 @@ export default ({
   maxAge = FIVE_MINUTES,
   cacheFlag = 'cacheEnabled',
   enabledByDefault = false,
-}) => throttleAdapterEnhancer(
+} = {}) => throttleAdapterEnhancer(
   cacheAdapterEnhancer(axios.defaults.adapter, {
     cacheFlag,
     enabledByDefault,
